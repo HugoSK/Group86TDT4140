@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
-<header>
-</header>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <title>extrovert</title>
+</head>
 <body>
-<form action="feedback.php" method="post" style="height:50px;width:50px;">
-    <input type="submit" value="Feedback"/><br/>
-</form>
+    <div ID="header">Extrovert</div>
+    <div id="knapper">
+		<form action="student.php" method="post" >
+			<input type="submit" value="Student" class="button" style="vertical-align:middle"</input><br>
+		</form>
+		<form action="teacher.php" method="post" >
+			<input type="submit" value="Teacher" class="button" style="vertical-align:middle"</button><br>
+		</form>
+    </div>
 </body>
 </html>
