@@ -1,0 +1,60 @@
+
+body {
+     background-image: url("bakgrunn.jpg");
+     background-repeat:no-repeat;
+     background-size:cover;
+     background-color: #E2F8F9;
+}
+
+#header {
+    font-family: "Bodoni 72 Oldstyle";
+    font-weight: bold;
+    font-size: 70px;
+    color: #052944;
+    text-align: center;
+    margin-top: 40px;
+}
+#knapper {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.button {
+    background-color: #33658C;
+    font-family: "ITC Eras Light", Eras;
+    text-align: center;
+    display: inline-block;
+    margin-top: 50px;
+    width: 550px;
+    font-size: 80px;
+    color: #E2F8F9;
+    border: none;
+    padding: 20px 32px;
+    border-radius: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -30px;
+  transition: 0.5s;
+
+}
+
+.button:hover span {
+  padding-right: 50px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
