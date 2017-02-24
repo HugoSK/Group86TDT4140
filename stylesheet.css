@@ -36,7 +36,7 @@ body {
     background-color: #E2F8F9;
 }
 
-.counter {
+#counter {
     font-family: "Bodoni 72 Oldstyle";
     font-weight: bold;
     font-size: 70px;
