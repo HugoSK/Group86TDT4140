@@ -26,7 +26,7 @@ body {
     display: inline-block;
     margin-top: 50px;
     width: 550px;
-    font-size: 80px;
+    font-size: 60px;
     color: #E2F8F9;
     border: none;
     padding: 20px 32px;
@@ -34,27 +34,13 @@ body {
     transition: all 0.5s;
     cursor: pointer;
 }
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -30px;
-  transition: 0.5s;
-
+#slowdownBtn {
+    background-color: #E2F8F9;
 }
 
-.button:hover span {
-  padding-right: 50px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
+#counter {
+    font-family: "ITC Eras Light", Eras;
+    font-size: 60px;
+    text-align: center;
+    margin-top: 50px;
 }
