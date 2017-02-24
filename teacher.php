@@ -25,8 +25,8 @@ $conn->close();
 <body>
     <div ID="header">Extrovert</div>
     <div id="counter">
-        <p>Antall studenter som syns du er for rask: </p>
-        <?php echo $rowcount ?>
+        <p>Antall studenter som syns du er for rask: </p><br>
+        <h1><?php echo $rowcount ?><h1>
     </div>
 </body>
 </html>

@@ -36,11 +36,23 @@ body {
     background-color: #E2F8F9;
 }
 
-#counter {
+.counter {
     font-family: "Bodoni 72 Oldstyle";
     font-weight: bold;
     font-size: 70px;
     color: #052944;
     text-align: center;
     margin-top: 40px;
+}
+p {
+    font-family: "Bodoni 72 Oldstyle";
+    font-size: 40px;
+    text-align: center;
+    color: #33658C;
+}
+h1{
+    font-family: "Bodoni 72 Oldstyle";
+    font-size: 60px;
+    color: #E2F8F9;
+    text-align: center;
 }
