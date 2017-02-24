@@ -8,8 +8,8 @@
 
 <?php
 $servername = "mysql.stud.ntnu.no";
-$username = "olaliu_tdt4140";
-$password = "olaliu_tdt4140";
+$username = "o...";
+$password = "o...";
 $dbname = "olaliu_tdt4140database";
 
 // Create connection
@@ -24,8 +24,9 @@ $conn->close();
 ?>
 <body>
     <div ID="header">Extrovert</div>
-    <div id="knapper">
-        <button class="button" style="vertical-align:middle" ><span><?php echo $rowcount ?></span></button>
+    <div id="counter">
+        <p>Antall studenter som syns du er for rask: </p>
+        <?php echo $rowcount ?>
     </div>
 </body>
 </html>

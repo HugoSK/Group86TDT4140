@@ -8,8 +8,8 @@
 
 <?php
 $servername = "mysql.stud.ntnu.no";
-$username = "olaliu_tdt4140";
-$password = "olaliu_tdt4140";
+$username = "o...";
+$password = "o...";
 $dbname = "olaliu_tdt4140database";
 
 // Create connection
