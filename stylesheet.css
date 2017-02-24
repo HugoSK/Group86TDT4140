@@ -31,16 +31,16 @@ body {
     border: none;
     padding: 20px 32px;
     border-radius: 10px;
-    transition: all 0.5s;
-    cursor: pointer;
 }
 #slowdownBtn {
     background-color: #E2F8F9;
 }
 
 #counter {
-    font-family: "ITC Eras Light", Eras;
-    font-size: 60px;
+    font-family: "Bodoni 72 Oldstyle";
+    font-weight: bold;
+    font-size: 70px;
+    color: #052944;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 40px;
 }
