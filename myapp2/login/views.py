@@ -5,11 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required
-=======
-from login.models import *
->>>>>>> origin/master
 
 def register_view(request):
     if request.method == "POST":
@@ -32,7 +28,6 @@ def register_success(request):
 def index_view(request):
     return render_to_response('index.html')
 
-<<<<<<< HEAD
 def user_login(request):
     # Like before, obtain the context for the user's request.
     context = RequestContext(request)
@@ -76,15 +71,4 @@ def user_login(request):
 @login_required
 def user_login_success(request):
     return render_to_response('login/success.html')
-=======
-def student_view(request):
-    if request.method == "POST":
-        slowReq = Slowdown()
-        slowReq.save()
-    return render_to_response('usersites/student.html')
-
-def teacher_view(request):
-    return render_to_response('usersites/teacher.html')
-
->>>>>>> origin/master
 
