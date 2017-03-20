@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
+from login.models import *
 
 def register_view(request):
     if request.method == "POST":
@@ -25,4 +26,14 @@ def register_success(request):
 
 def index_view(request):
     return render_to_response('index.html')
+
+def student_view(request):
+    if request.method == "POST":
+        slowReq = Slowdown()
+        slowReq.save()
+    return render_to_response('usersites/student.html')
+
+def teacher_view(request):
+    return render_to_response('usersites/teacher.html')
+
 
