@@ -1,0 +1,26 @@
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="Python 3.4.3 (C:\Python34\python.exe)" />
+      <type value="Python SDK" />
+      <version value="Python 3.4.3" />
+      <homePath value="C:\Python34\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="file://C:/Python34/DLLs" />
+            <root type="simple" url="file://C:/Python34/Lib" />
+            <root type="simple" url="file://C:/Python34" />
+            <root type="simple" url="file://C:/Python34/Lib/site-packages" />
+            <root type="simple" url="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/-1442825926" />
+            <root type="simple" url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+  </component>
+</application>
