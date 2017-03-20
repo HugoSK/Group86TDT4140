@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from login import views
+from django.contrib.auth.views import login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/$', views.index_view),
+    url(r'^$', views.index_view, name='index'),
+    url(r'^login/$', views.user_login, name='login'),
+    url(r'^login/success/$', views.user_login_success, name='success'),
     url(r'^register/$', views.register_view, name='register'),
     url(r'^register/success/$', views.register_success, name='register_success'),
 ]
