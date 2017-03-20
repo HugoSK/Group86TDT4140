@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^login/success/$', views.user_login_success, name='success'),
     url(r'^register/$', views.register_view, name='register'),
     url(r'^register/success/$', views.register_success, name='register_success'),
+    url(r'^usersites/student/$', views.student_view, name='student')
 ]
