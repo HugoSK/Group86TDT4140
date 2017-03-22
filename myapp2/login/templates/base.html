@@ -6,8 +6,18 @@
         {% block title %}{% endblock %}</title>
     </head>
     <body>
-        <h1>{% block head %}{% endblock %}</h1>
-        {% block content %}{% endblock %}
+    <div id="header">Extrovert
+    <form action="register">
+          <button class="register">Register</button>
+         </form>
+        <div class="dropdown">
+            <form action="../login">
+                <button class="login">Login</button>
+         </form>
+        </div>
+    </div>
+    <br><br><br><p>{% block head %}{% endblock %}</p>
+    <div id="mainpic">{% block content %}{% endblock %}</div>
 
     </body>
 </html>

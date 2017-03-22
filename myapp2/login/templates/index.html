@@ -8,11 +8,17 @@
 <body>
     <h1>Extrovert</h1>
      <div id="header">Extrovert
-          <button class="register" href= "{% url 'register' %}"> Register </button><br>
+         <form action="register">
+          <button class="register">Register</button>
+         </form>
         <div class="dropdown">
-            <button class='login' href= "{% url 'login' %}"> Login</button>
+            <form action="login">
+                <button class="login">Login</button>
+         </form>
         </div>
      </div>
+
+
     <div id="mainpic"><img src="../static/image/forsidebilde.png"></div>
 </body>
 </html>
