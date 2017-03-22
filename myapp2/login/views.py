@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, render
 from login.forms import *
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
@@ -37,8 +37,8 @@ def user_login(request):
     if request.method == 'POST':
         # Gather the username and password provided by the user.
         # This information is obtained from the login form.
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
@@ -60,7 +60,7 @@ def user_login(request):
         else:
             # Bad login details were provided. So we can't log the user in.
             print("Invalid login details: {0}, {1}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
+            return render_to_response('login/login.html')
 
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
@@ -68,6 +68,27 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render_to_response('login/login.html', {}, context)
+
+@login_required(login_url='login')
+def homepage(request):
+    context = RequestContext(request)
+    if request.method == "POST":
+        className = request.POST.get('className')
+        create = request.POST.get('create')
+
+        if create:
+            Group.objects.create(name=className)
+            return HttpResponse("Created class:" + className)
+        else:
+            if Group.objects.get(name=className):
+                Group.objects.get(name=className).user_set.add(request.user)
+                return HttpResponse("Joined" + className)
+            else:
+                return HttpResponse("No class named: " + className)
+    else:
+        # No context variables to pass to the template system, hence the
+        # blank dictionary object...
+        return render_to_response('homepage.html', {}, context)
 
 
 @login_required(login_url='login')
