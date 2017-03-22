@@ -1,0 +1,152 @@
+body {
+    background: url("../image/bakgrunn.jpg");
+     background-repeat:no-repeat;
+     background-size:cover;
+     background-color: #E2F8F9;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #21537A;
+}
+.menu {
+    background-color: #33658C;
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-color:#21537A;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+    display: inline-block;
+    height: 70px;
+    padding 5px 5px;
+}
+.register {
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 170px;
+    background-color: #33658C;
+    border-color: #21537A;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+    font-family: "Arial";
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    height: 70px;
+    width: 100px;
+    color: #fff;
+    padding: 10px 20px;
+}
+.login {
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 70px;
+    background-color: #33658C;
+    border-color: #21537A;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+    font-family: "Arial";
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    height: 70px;
+    width: 100px;
+    color: #fff;
+    padding: 10px 20px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+}
+.dropdown-menu{
+      display: none;
+      position: fixed;
+      right: 70px;
+      top: 70px;
+      background-color: #33658C;
+      min-width: 100px;
+      z-index: 1;
+      text-align: center;
+}
+.dropdown-menu a {
+       color: #fff;
+       text-decoration:none;
+       font-size: 18px;
+       font-family: "Arial";
+       font-weight:normal;
+       height: 50px;
+       padding-top: 10px;
+       display: block;
+}
+
+.dropdown-menu a:hover {background-color: #21537A;}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+#header {
+    position: fixed;
+    min-width: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1030;
+    height: 70px;
+    background-color: #33658C;
+    font-family: "Bodoni 72 Oldstyle";
+    font-weight: bold;
+    font-size: 50px;
+    color: #052944;
+    padding-left: 20px;
+}
+
+#mainpic {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.button {
+    background-color: #33658C;
+    font-family: "ITC Eras Light", Eras;
+    text-align: center;
+    display: inline-block;
+    margin-top: 50px;
+    width: 550px;
+    font-size: 60px;
+    color: #E2F8F9;
+    border: none;
+    padding: 20px 32px;
+    border-radius: 10px;
+}
+#slowdownBtn {
+    background-color: #E2F8F9;
+}
+
+#counterÂ {
+    font-family: "Bodoni 72 Oldstyle";
+    font-weight: bold;
+    font-size: 70px;
+    color: #052944;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+p {
+    font-family: "Bodoni 72 Oldstyle";
+    font-size: 40px;
+    text-align: center;
+    color: #33658C;
+}
+h1{
+    font-family: "Bodoni 72 Oldstyle";
+    font-size: 60px;
+    color: #33658C;
+    text-align: center;
+}
