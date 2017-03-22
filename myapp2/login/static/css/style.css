@@ -21,6 +21,7 @@ button:hover {
     height: 70px;
     padding 5px 5px;
 }
+
 .register {
     cursor: pointer;
     position: fixed;
@@ -125,6 +126,18 @@ button:hover {
     padding: 20px 32px;
     border-radius: 10px;
 }
+table{
+    font-family: "Bodoni 72 Oldstyle";
+    color: #052944;
+    display: inline-block;
+    padding: 40px;
+}
+#registerbtn{
+    text-align: center;
+    background-color: #33658C;
+    font-size: 40px;
+}
+
 #slowdownBtn {
     background-color: #E2F8F9;
 }
@@ -148,5 +161,11 @@ h1{
     font-family: "Bodoni 72 Oldstyle";
     font-size: 60px;
     color: #33658C;
+    text-align: center;
+}
+h2{
+    font-family: "Times New Roman";
+    font-size: 50px;
+    color: #052944;
     text-align: center;
 }
