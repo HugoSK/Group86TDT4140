@@ -74,11 +74,13 @@ def user_login_success(request):
     return render_to_response('login/success.html')
 
 def student_view(request):
-    if request.method == "POST":
-        slowReq = Slowdown()
-        slowReq.save()
+    if request.method == "POST": #Refererer til html document sin action type, her har vi form method=post i htmldokumentet
+        slowReq = Slowdown() #Klassen i models, husk å kjøre commands i notes
+        slowReq.save() #Lagrer det til database, for å hente ut referer til Slowdown.objects
     return render_to_response('usersites/student.html')
 
 def teacher_view(request):
-    return render_to_response('usersites/teacher.html')
+    slowReq = Slowdown.objects.count() #Henter ut antallet forespørsler i databasen
+    variables = RequestContext(request, {'slowReq': slowReq}) #Gjør om til variabel som html forstår
+    return render_to_response('usersites/teacher.html', variables) #Må sende variabel til dokumentet her
 
