@@ -1,12 +1,18 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1> INDEX </h1>
-    <a href= "{% url 'register' %}"> Register </a>
-    <a href= "{% url 'login' %}"> Login</a>
+    <h1>Extrovert</h1>
+     <div id="header">Extrovert
+          <button class="register" href= "{% url 'register' %}"> Register </button><br>
+        <div class="dropdown">
+            <button class='login' href= "{% url 'login' %}"> Login</button>
+        </div>
+     </div>
+    <div id="mainpic"><img src="../static/image/forsidebilde.png"></div>
 </body>
 </html>
