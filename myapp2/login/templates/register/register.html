@@ -3,7 +3,16 @@
 {% block head %}User Registration{% endblock %}
 {% block content %}
     <form method="post" action=".">
-        {{ form }}
-        <input type="submit" value="Register" />
+        <table>
+            <tr id="labels"><td style="padding-top: 20px;">{{ form.username.label }}</tr></td>
+            <tr id="inputfield"><td>{{ form.username }}</tr></td>
+            <tr id="labels"><td style="padding-top: 20px;">{{ form.email.label }}</td></tr>
+            <tr id="inputfield"><td>{{ form.email }}</td></tr>
+            <tr id="labels"><td style="padding-top: 20px;">{{ form.password1.label }}</td></tr>
+            <tr id="inputfield"><td>{{ form.password1 }}</td></tr>
+            <tr id="labels"><td style="padding-top: 20px;">{{ form.password2.label }}</td></tr>
+            <tr id="inputfield"><td>{{ form.password2 }}</td></tr>
+        </table>
+        <br><br><input type="submit" value="Register" />
     </form>
 {% endblock %}

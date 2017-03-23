@@ -22,11 +22,38 @@ button:hover {
     padding 5px 5px;
 }
 
+input[type=submit]{
+    width: 150px;
+    height: 35px;
+    font-size: 17px;
+    color: #fff;
+    background-color: #21537A;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+}
+#labels{
+    font-family: Arial;
+    color: #052944;
+    font-size: 18px;
+}
+#id_username, #id_email, #id_password1, #id_password2{
+    display: inline-block;
+    width: 300px;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+}
 .register {
     cursor: pointer;
     position: fixed;
     top: 0;
-    right: 170px;
+    right: 175px;
     background-color: #33658C;
     border-color: #21537A;
     border-right: 0;
@@ -59,6 +86,7 @@ button:hover {
     width: 100px;
     color: #fff;
     padding: 10px 20px;
+    border-right: 1px solid #21537A;
 }
 .dropdown {
     position: relative;
@@ -105,6 +133,7 @@ button:hover {
     font-weight: bold;
     font-size: 50px;
     color: #052944;
+    border-bottom: 1px solid #21537A;
     padding-left: 20px;
 }
 
@@ -126,11 +155,12 @@ button:hover {
     padding: 20px 32px;
     border-radius: 10px;
 }
+
 table{
     font-family: "Bodoni 72 Oldstyle";
     color: #052944;
     display: inline-block;
-    padding: 40px;
+    padding: 0px;
 }
 #registerbtn{
     text-align: center;
@@ -155,7 +185,8 @@ p {
     font-family: "Bodoni 72 Oldstyle";
     font-size: 40px;
     text-align: center;
-    color: #33658C;
+    color: #052944;
+    font-weight: bold;
 }
 h1{
     font-family: "Bodoni 72 Oldstyle";
