@@ -1,14 +1,13 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>course</title>
-</head>
+{% extends "homepage.html" %}
+{% block title %}Course{% endblock %}
+{% block head %}Join/create courses!{% endblock %}
+{% block content %}
 <body>
 <form id="classes" method="post" action="/course/">
-    className: <input type="text" name="className" value="" size="50" />
+    <input type="text" name="className" value="" size="50" />
     <br />
-    create: <input type="submit" name="create" value="Create class" />
-    join: <input type="submit" name="join" value="Join class" />
+    <input type="submit" name="create" value="Create class" />
+    <input type="submit" name="join" value="Join class" />
 </form>
 </body>
-</html>
+{% endblock %}

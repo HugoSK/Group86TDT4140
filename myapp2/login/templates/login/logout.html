@@ -2,20 +2,9 @@
 {% block title %}Sign out{% endblock %}
 {% block head %}Sign out{% endblock %}
 {% block content %}
-    <html>
-    <head>
-        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
-        <title>Sign out</title>
-    </head>
-
-    <body>
-
     <form id="logout_form" method="post" action="/logout/">
         {% csrf_token %}
 
         <input type="submit" value="Sign out" />
     </form>
-
-    </body>
-    </html>
 {% endblock %}
