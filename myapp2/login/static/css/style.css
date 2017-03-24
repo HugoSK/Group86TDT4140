@@ -49,6 +49,7 @@ input[type=submit]{
     padding: 5px;
     border-radius: 3px;
 }
+
 .register {
     cursor: pointer;
     position: fixed;
@@ -136,6 +137,13 @@ input[type=submit]{
     border-bottom: 1px solid #21537A;
     padding-left: 20px;
 }
+a {
+    font-family: "Bodoni 72 Oldstyle";
+    font-weight: bold;
+    font-size: 50px;
+    color: #052944;
+    text-decoration: none;
+}
 
 #mainpic {
     text-align: center;
@@ -153,7 +161,7 @@ input[type=submit]{
     color: #E2F8F9;
     border: none;
     padding: 20px 32px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 table{

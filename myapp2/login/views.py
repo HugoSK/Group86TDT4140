@@ -53,7 +53,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/login/success')
+                return HttpResponseRedirect('/home')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
@@ -129,4 +129,20 @@ def teacher_view(request):
     slowReq = Slowdown.objects.count() #Henter ut antallet forespørsler i databasen
     variables = RequestContext(request, {'slowReq': slowReq}) #Gjør om til variabel som html forstår
     return render_to_response('usersites/teacher.html', variables) #Må sende variabel til dokumentet her
+
+@login_required(login_url='login')
+def user_view(request):
+    context = RequestContext(request)
+    if request.method == "POST":
+        student = request.POST.get('student')
+
+        if student:
+            return HttpResponseRedirect('/usersites/student')
+        else:
+            return HttpResponseRedirect('/usersites/teacher')
+    else:
+        # No context variables to pass to the template system, hence the
+        # blank dictionary object...
+        return render_to_response('/homepage.html', {}, context)
+
 
