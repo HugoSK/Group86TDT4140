@@ -96,7 +96,7 @@ def user_login_success(request):
     return render_to_response('login/success.html')
 
 def user_logout_success(request):
-    return render_to_response('login/success.html')
+    return render_to_response('login/logout_success.html')
 
 @login_required(login_url='login')
 def user_logout(request):
@@ -107,7 +107,7 @@ def user_logout(request):
     # If the request is a HTTP POST, try to pull out the relevant information.
     if request.method == "POST":
         logout(request)
-        return HttpResponseRedirect('/logout_success')
+        return HttpResponseRedirect('/')
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
