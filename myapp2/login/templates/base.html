@@ -7,14 +7,12 @@
     </head>
     <body>
     <div id="header">Extrovert
-    <form action="register">
-          <button class="register">Register</button>
-         </form>
-        <div class="dropdown">
-            <form action="../login">
-                <button class="login">Login</button>
-         </form>
-        </div>
+    <form action="../register">
+        <button class="register">Register</button>
+    </form>
+    <form action="../login">
+        <button class="login">Login</button>
+    </form>
     </div>
     <br><br><br><p>{% block head %}{% endblock %}</p>
     <div style="text-align: center; padding-top: 10px;">{% block content %}{% endblock %}</div>
