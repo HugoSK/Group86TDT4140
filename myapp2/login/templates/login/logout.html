@@ -1,0 +1,21 @@
+{% extends "homepage.html" %}
+{% block title %}Logout{% endblock %}
+{% block head %}Logout{% endblock %}
+{% block content %}
+    <html>
+    <head>
+        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        <title>Login</title>
+    </head>
+
+    <body>
+
+    <form id="login_form" method="post" action="/logout/">
+        {% csrf_token %}
+
+        <input type="submit" value="logout" />
+    </form>
+
+    </body>
+    </html>
+{% endblock %}

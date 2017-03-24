@@ -22,10 +22,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index_view, name='index'),
     url(r'^login/$', views.user_login, name='login'),
+    url(r'^login/$', views.user_logout, name='logout'),
     url(r'^login/success/$', views.user_login_success, name='success'),
     url(r'^register/$', views.register_view, name='register'),
     url(r'^register/success/$', views.register_success, name='register_success'),
     url(r'^usersites/student/$', views.student_view, name='student'),
     url(r'^usersites/teacher/$', views.teacher_view, name='teacher'),
-    url(r'^home/$', views.homepage, name='homepage'),
+    url(r'^home/$', views.homepage_view, name='homepage'),
+    url(r'^course/$', views.course_view, name='course'),
 ]

@@ -1,15 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>homepage</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Django Login Application |
+        {% block title %}{% endblock %}</title>
 </head>
 <body>
-<form id="classes" method="post" action="/home/">
-    className: <input type="text" name="className" value="" size="50" />
-    <br />
-    create: <input type="submit" name="create" value="Create class" />
-    join: <input type="submit" name="join" value="Join class" />
-</form>
+<div id="header">Extrovert
+    <form action="/course">
+        <button class="Register" >Join/Create course</button>
+    </form>
+    <form action="/logout">
+        <button class="Login" >Logout</button>
+    </form>
+</div>
+<br><br><br><p>{% block head %}{% endblock %}</p>
+<div style="text-align: center; padding-top: 10px;">{% block content %}{% endblock %}</div>
+
 </body>
 </html>

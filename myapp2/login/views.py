@@ -70,7 +70,7 @@ def user_login(request):
         return render_to_response('login/login.html', {}, context)
 
 @login_required(login_url='login')
-def homepage(request):
+def course_view(request):
     context = RequestContext(request)
     if request.method == "POST":
         className = request.POST.get('className')
@@ -88,13 +88,17 @@ def homepage(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render_to_response('homepage.html', {}, context)
+        return render_to_response('courses/courses.html', {}, context)
 
 
 @login_required(login_url='login')
 def user_login_success(request):
     return render_to_response('login/success.html')
 
+@login_required(login_url='login')
+def user_logout(request):
+
+    return render_to_response('login/logout.html')
 
 @login_required(login_url='login')
 def student_view(request):
@@ -103,6 +107,9 @@ def student_view(request):
         slowReq.save() #Lagrer det til database, for å hente ut referer til Slowdown.objects
     return render_to_response('usersites/student.html')
 
+@login_required(login_url='login')
+def homepage_view(request):
+    return render_to_response('homepage.html')
 
 @login_required(login_url='login')
 def teacher_view(request):
