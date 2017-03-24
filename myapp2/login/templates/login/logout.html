@@ -1,19 +1,19 @@
 {% extends "homepage.html" %}
-{% block title %}Logout{% endblock %}
-{% block head %}Logout{% endblock %}
+{% block title %}Sign out{% endblock %}
+{% block head %}Sign out{% endblock %}
 {% block content %}
     <html>
     <head>
         <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
-        <title>Login</title>
+        <title>Sign out</title>
     </head>
 
     <body>
 
-    <form id="login_form" method="post" action="/logout/">
+    <form id="logout_form" method="post" action="/logout/">
         {% csrf_token %}
 
-        <input type="submit" value="logout" />
+        <input type="submit" value="Sign out" />
     </form>
 
     </body>

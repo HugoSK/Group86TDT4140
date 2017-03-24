@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, render
 from login.forms import *
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User, Group
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -95,10 +95,23 @@ def course_view(request):
 def user_login_success(request):
     return render_to_response('login/success.html')
 
+def user_logout_success(request):
+    return render_to_response('login/success.html')
+
 @login_required(login_url='login')
 def user_logout(request):
 
-    return render_to_response('login/logout.html')
+    # Like before, obtain the context for the user's request.
+    context = RequestContext(request)
+
+    # If the request is a HTTP POST, try to pull out the relevant information.
+    if request.method == "POST":
+        logout(request)
+        return HttpResponseRedirect('/logout_success')
+    else:
+        # No context variables to pass to the template system, hence the
+        # blank dictionary object...
+        return render_to_response('login/logout.html', {}, context)
 
 @login_required(login_url='login')
 def student_view(request):
