@@ -15,7 +15,15 @@
     </form>
 </div>
 <br><br><br><p>{% block head %}{% endblock %}</p>
-<div style="text-align: center; padding-top: 10px;">{% block content %}{% endblock %}</div>
+<div style="text-align: center; padding-top: 10px;">
+    {% block content %}
+        <body>
+        <form id="classes" method="post" action="/usersites/">
+            <input type="submit" name="student" value="student join ex." />
+            <input type="submit" name="teacher" value="teacher join ex." />
+        </form>
+        </body>
+    {% endblock %}</div>
 
 </body>
 </html>
