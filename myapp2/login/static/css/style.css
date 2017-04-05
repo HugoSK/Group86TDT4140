@@ -34,13 +34,22 @@ input[type=submit]{
     border: none;
     padding: 5px;
     border-radius: 3px;
-}
+
 #labels{
     font-family: Arial;
     color: #052944;
     font-size: 18px;
 }
 #id_username, #id_email, #id_password1, #id_password2{
+    display: inline-block;
+    width: 300px;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+}
+#inputfield{
     display: inline-block;
     width: 300px;
     height: 35px;

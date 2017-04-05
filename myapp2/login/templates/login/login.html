@@ -12,14 +12,17 @@
 
             <form id="login_form" method="post" action="/login/">
                 {% csrf_token %}
-                Username: <input type="text" name="username" value="" size="50" />
-                <br /><br>
-                Password: <input type="password" name="password" value="" size="50" />
-                <br />
+                <table>
+                    <tr><td id="labels">Username: </td></tr>
+                    <tr><td id="inputfield"><input type="text" name="username" size="50" style="display: inline-block; width: 300px; height: 35px; font-size: 14px; border: none; padding: 5px; border-radius: 3px;"/></td></tr>
+                    <tr><td id="labels" style="padding-top: 20px;">Password: </td></tr>
+                    <tr><td id="inputfield"><input type="password" name="password" size="50"  style="display: inline-block; width: 300px; height: 35px;font-size: 14px; border: none; padding: 5px; border-radius: 3px;"/></td></tr>
+                </table>
 
-                <input type="submit" value="submit" />
-    </form>
+                <br>
 
-    </body>
+                <input type="submit" value="login" />
+            </form>
+        </body>
     </html>
 {% endblock %}
