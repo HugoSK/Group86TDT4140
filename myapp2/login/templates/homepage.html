@@ -10,12 +10,6 @@
     <form action="/logout">
         <button class="Login" >Sign out</button>
     </form>
-    <form action="../course">
-        <div style="text-align: center; padding-top:100px;">
-            <button class="button">Create course</button>
-            <button class="button">Join course</button>
-        </div>
-    </form>
 </div>
 <br><br><br><p>{% block head %}{% endblock %}</p>
 <div style="text-align: center; padding-top: 10px;">
@@ -24,6 +18,12 @@
         <form id="classes" method="post" action="/usersites/">
             <input type="submit" name="student" value="student join ex." />
             <input type="submit" name="teacher" value="teacher join ex." />
+        </form>
+        <form action="../course">
+            <div style="text-align: center; padding-top:100px;">
+                <button class="button">Create course</button>
+                <button class="button">Join course</button>
+            </div>
         </form>
         </body>
     {% endblock %}</div>
