@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from login.models import *
+import json
+import datetime
 
 def register_view(request):
     if request.method == "POST":
@@ -126,8 +128,31 @@ def homepage_view(request):
 
 @login_required(login_url='login')
 def teacher_view(request):
-    slowReq = Slowdown.objects.count() #Henter ut antallet forespørsler i databasen
-    variables = RequestContext(request, {'slowReq': slowReq}) #Gjør om til variabel som html forstår
+
+    class_start = datetime.datetime.now() - datetime.timedelta(hours=2)
+    data = Slowdown.objects.filter(date__range=(class_start, datetime.datetime.now()))
+    slowReq = data.count() #Henter ut antallet forespørsler i databasen
+    data = data.values_list('date', flat=True)
+    minutelist = {}
+    for feedback in data:
+        key = 120 - feedback.minute
+        if key in minutelist:
+            minutelist[key] += 1
+        else:
+            minutelist[key] = 1
+
+    list = [['Time', 'Slowdown pressed']]
+
+    for i in range(0, 124, 2):
+        count = 0
+        if i in minutelist.keys():
+            count += minutelist[i]
+        elif i - 1 in minutelist.keys():
+            count += minutelist[i - 1]
+        list.append([i, count])
+
+
+    variables = RequestContext(request, {'slowReq': slowReq, 'array':json.dumps(list)}) #Gjør om til variabel som html forstår
     return render_to_response('usersites/teacher.html', variables) #Må sende variabel til dokumentet her
 
 @login_required(login_url='login')
@@ -145,4 +170,28 @@ def user_view(request):
         # blank dictionary object...
         return render_to_response('/homepage.html', {}, context)
 
+def test_view(request):
+    class_start = datetime.datetime.now()-datetime.timedelta(hours=2)
+    data = Slowdown.objects.filter(date__range=(class_start, datetime.datetime.now()))
+    data = data.values_list('date', flat=True)
+    minutelist = {}
+    for feedback in data:
+        key = 120-feedback.minute
+        if key in minutelist:
+            minutelist[key] += 1
+        else:
+            minutelist[key] = 1
+
+    list = [['Time', 'Slowdown pressed']]
+
+    for i in range(0, 127, 2):
+        count = 0
+        if i in minutelist.keys():
+            count += minutelist[i]
+        elif i-1 in minutelist.keys():
+            count += minutelist[i-1]
+        list.append([i, count])
+
+
+    return render_to_response('usersites/testing.html', {'array': json.dumps(list)})
 

@@ -1,6 +1,6 @@
 {% extends "homepage.html" %}
 {% block title %}Extrovert{% endblock %}
-{% block head %}Teacher
+{% block head %}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
@@ -23,9 +23,6 @@
     </script>
 {% endblock %}
 {% block content %}
-    {{ slowReq }}
-    <p>Antall studenter som synes du er for rask</p>
-    <div id="curve_chart" style="width: 500px; height: 350px; position:absolute;top:40%; right:37%;"></div>
-    <meta http-equiv="refresh" content="60" >
+    <div id="curve_chart" style="width: 600px; height: 400px; top:400px; left:600px;"></div>
 {% endblock %}
 
