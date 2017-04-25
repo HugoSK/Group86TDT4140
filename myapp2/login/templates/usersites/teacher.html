@@ -23,10 +23,12 @@
     </script>
 {% endblock %}
 {% block content %}
-    <h2 style="color: #33658C; font-size: 120px; text-shadow: 2px 2px #052944;">{{ slowReq }}</h2>
+    <p>Antall studenter som synes du er for rask:</p>
+    <div style="width: 500px; position: absolute; top:20%; right: 35%;">
+        <h2 style="color: #33658C; font-size: 120px; text-shadow: 2px 2px #052944; text-align: center;">{{ slowReq }}</h2>
+    </div>
     <!-- telleren som forteller hvor mange som synes forelesningen går for raskt-->
-    <p>Antall studenter som synes du er for rask</p>
-    <div id="curve_chart" style="width: 500px; height: 350px; position:absolute;top:40%; right:37%;"></div>
+    <div id="curve_chart" style="width: 500px; height: 350px; position:absolute;top:45%; right:35%;"></div>
     <meta http-equiv="refresh" content="60" >
 {% endblock %}
 
