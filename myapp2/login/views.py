@@ -204,7 +204,7 @@ def teacher_view(request):
             variables = RequestContext(request, {'count': total_count, 'array':json.dumps(list), 'start_time':start_time}) #Gjør om til variabel som html forstår
             return render_to_response('usersites/teacher.html', variables) #Må sende variabel til dokumentet her
         render_to_response('usersites/teacher.html')
-    return HttpResponseRedirect('/course') #Må sende variabel til dokumentet her
+    return render_to_response('usersites/teacher.html') #Må sende variabel til dokumentet her
 
 @login_required(login_url='login')
 def user_view(request):
