@@ -1,10 +1,22 @@
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
+from django.utils import timezone
 # Create your models here.
 #do following command in command window after adding class:
 #python manage.py makemigrations
 #python manage.py migrate
 
+class Datet(models.Model):
+    name = models.CharField(max_length=128)
+    datetime = models.DateTimeField(default=timezone.now, blank= True)
+
 class Slowdown(models.Model):
-    date = models.DateTimeField(default=datetime.now())
+    name = models.CharField(max_length=128)
+    datetimes = models.ManyToManyField(Datet, through='Membership')
+
+class Membership(models.Model):
+    datetime = models.ForeignKey(Datet, on_delete=models.CASCADE)
+    slowdown = models.ForeignKey(Slowdown, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)

@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^usersites/teacher/$', views.teacher_view, name='teacher'),
     url(r'^home/$', views.homepage_view, name='homepage'),
     url(r'^course/$', views.course_view, name='course'),
+    url(r'^course/page/$', views.joined_course_view, name='course_view'),
 ]

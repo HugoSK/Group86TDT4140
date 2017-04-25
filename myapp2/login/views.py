@@ -8,7 +8,9 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from login.models import *
 import json
-import datetime
+from django.contrib.contenttypes.models import ContentType
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 def register_view(request):
     if request.method == "POST":
@@ -79,19 +81,30 @@ def course_view(request):
         create = request.POST.get('create')
 
         if create:
-            Group.objects.create(name=className)
-            return HttpResponse("Created class:" + className)
+            if (len(Group.objects.filter(name = className)) == 0):
+                content_type = ContentType.objects.get_for_model(User)
+                permission = Permission.objects.create(
+                    codename='owner_'+className,
+                    name='owner for '+className,
+                    content_type=content_type,
+                )
+
+                Group.objects.create(name=className)            #create new group
+                request.user.user_permissions.add(permission)   #current user gets owner permission
+
+                return HttpResponseRedirect('/course/page/?className=%s' % (className))
+            else:
+                return HttpResponse('groupname already taken') #todo, add comment in template about this
         else:
             if Group.objects.get(name=className):
                 Group.objects.get(name=className).user_set.add(request.user)
-                return HttpResponse("Joined" + className)
+                return HttpResponseRedirect('/course/page/?className=%s' % (className))
             else:
                 return HttpResponse("No class named: " + className)
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render_to_response('courses/courses.html', {}, context)
-
 
 @login_required(login_url='login')
 def user_login_success(request):
@@ -117,10 +130,43 @@ def user_logout(request):
 
 @login_required(login_url='login')
 def student_view(request):
-    if request.method == "POST": #Refererer til html document sin action type, her har vi form method=post i htmldokumentet
-        slowReq = Slowdown() #Klassen i models, husk å kjøre commands i notes
-        slowReq.save() #Lagrer det til database, for å hente ut referer til Slowdown.objects
-    return render_to_response('usersites/student.html')
+    group_name = request.GET.get('className')
+    if request.method == "POST":
+        if (Group.objects.filter(name=group_name)).count() == 1:
+            user = request.user
+            group = Group.objects.get(name = group_name)
+
+            if (Slowdown.objects.filter(name = group_name).count() == 0):
+                datetime_object = Datet.objects.create(name = user.username)
+                slowdown_object = Slowdown.objects.create(name = user.username)
+                membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datetime = datetime_object)
+                membership_object.save()
+                slowdown_object.save()
+                return render_to_response('usersites/student.html')
+
+            slowdown_object = Slowdown.objects.filter(name = user.username)
+
+            if Membership.objects.filter(person = user, group = group).count() == 1:
+                datetime_object = Datet.objects.create(name = user.username)
+                last_datetime_object = slowdown_object.datetimes.order_by('-id')[0]
+                if (last_datetime_object.datetime < datetime_object.datetime - timedelta(seconds=1)):
+                    return HttpResponse('for rask ;)')
+                else:
+                    slowdown_object.datetimes.add(datetime_object)
+                    membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datetime = datetime_object)
+                    membership_object.save()
+                    slowdown_object.save()
+                    return render_to_response('usersites/student.html')
+            else:
+                datetime_object = Datet.objects.create(name = user.username)
+                membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datetime = datetime_object)
+                membership_object.save()
+            return render_to_response('usersites/student.html')
+        else:
+            return HttpResponseRedirect('/course')
+    else:
+        return render_to_response('usersites/student.html')
+
 
 @login_required(login_url='login')
 def homepage_view(request):
@@ -128,32 +174,37 @@ def homepage_view(request):
 
 @login_required(login_url='login')
 def teacher_view(request):
+    group_name = request.GET.get('className')
+    if (request.user.user_permissions.filter(codename='owner_'+group_name).count() == 1):
+        if Membership.objects.filter(group = Group.objects.filter(name=group_name)).count() > 0:
+            membership_objects = Membership.objects.filter(group = Group.objects.filter(name=group_name)[0])
+            start_time = membership_objects[0].datetime.datetime
 
-    class_start = datetime.datetime.now() - datetime.timedelta(hours=2)
-    data = Slowdown.objects.filter(date__range=(class_start, datetime.datetime.now()))
-    slowReq = data.count() #Henter ut antallet forespørsler i databasen
-    data = data.values_list('date', flat=True)
-    minutelist = {}
-    for feedback in data:
-        key = 120 - feedback.minute
-        if key in minutelist:
-            minutelist[key] += 1
-        else:
-            minutelist[key] = 1
+            total_count = membership_objects.count() #Henter ut antallet forespørsler i databasen
+            data = membership_objects.values_list('datetime', flat=True)
 
-    list = [['Time', 'Slowdown pressed']]
+            minutelist = {}
+            for feedback in data:
+                key = round((membership_objects[feedback-1].datetime.datetime - start_time).total_seconds()/60)
+                if key in minutelist:
+                    minutelist[key] += 1
+                else:
+                    minutelist[key] = 1
 
-    for i in range(0, 124, 2):
-        count = 0
-        if i in minutelist.keys():
-            count += minutelist[i]
-        elif i - 1 in minutelist.keys():
-            count += minutelist[i - 1]
-        list.append([i, count])
+            list = [['Time', 'Slowdown pressed']]
 
+            for i in range(0, 60, 2):
+                count = 0
+                if i in minutelist.keys():
+                    count += minutelist[i]
+                elif i - 1 in minutelist.keys():
+                    count += minutelist[i - 1]
+                list.append([i, count])
 
-    variables = RequestContext(request, {'slowReq': slowReq, 'array':json.dumps(list)}) #Gjør om til variabel som html forstår
-    return render_to_response('usersites/teacher.html', variables) #Må sende variabel til dokumentet her
+            variables = RequestContext(request, {'count': total_count, 'array':json.dumps(list), 'start_time':start_time}) #Gjør om til variabel som html forstår
+            return render_to_response('usersites/teacher.html', variables) #Må sende variabel til dokumentet her
+        render_to_response('usersites/teacher.html')
+    return HttpResponseRedirect('/course') #Må sende variabel til dokumentet her
 
 @login_required(login_url='login')
 def user_view(request):
@@ -195,3 +246,14 @@ def test_view(request):
 
     return render_to_response('usersites/testing.html', {'array': json.dumps(list)})
 
+@login_required(login_url='login')
+def joined_course_view(request):
+    if Group.objects.get(name=request.GET.get('className', '/')):
+        user = request.user
+        group = Group.objects.get(name=request.GET.get('className', '/'))
+        if (user.user_permissions.filter(codename='owner_'+group.name).count() == 1):
+            return HttpResponseRedirect('/usersites/teacher/?className=%s' % (group.name))
+        else:
+            return HttpResponseRedirect('/usersites/student/?className=%s' % (group.name))
+    else:
+        return HttpResponseRedirect('/course')
