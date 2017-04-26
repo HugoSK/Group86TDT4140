@@ -29,4 +29,4 @@ class RegistrationForm(forms.Form):
         return self.cleaned_data
 
 class QuestionForm(forms.Form):
-    question = forms.CharField(label='question', max_length=200)
+    question = forms.CharField(label=_("Question"), max_length=200)
