@@ -35,6 +35,13 @@
         <div id="curve_chart" style="width: 610px; height: 450px; bottom: 0%; position:absolute;"></div>
     </div>
     <meta http-equiv="refresh" content="10" >
+
+    {% for question in questions %}
+        {% for part in question%}
+            {{ part }} <br>
+        {% endfor %}
+    {% endfor %}
+
 {% endblock %}
 
 

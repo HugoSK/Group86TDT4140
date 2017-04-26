@@ -19,3 +19,7 @@ class Membership(models.Model):
     slowdown = models.ForeignKey(Slowdown, on_delete=models.CASCADE)
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+class Question(models.Model):
+    questionText = models.CharField(max_length=256)
+    lecture = models.CharField(max_length=128)

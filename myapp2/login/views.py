@@ -169,54 +169,91 @@ def student_view(request):
     #if the request is a HTTP POST, try to pull out the relevant information.
     if request.method == "POST":
         #check if the group is valid, as one can send in another page in the url
-        if (Group.objects.filter(name=group_name)).count() > 0:
+        if request.POST['slowbtn'] == 'Slow down':
+            if (Group.objects.filter(name=group_name)).count() > 0:
 
-            user = request.user
-            group = Group.objects.get(name = group_name)
+                user = request.user
+                group = Group.objects.get(name = group_name)
 
-            #if no student has pressed slow down button one can just make a new membership object
-            if Membership.objects.filter(group = group).count() == 0:
-                #if the user is a student and the user is the first to join, safe to save to database
-                datetime_object = Datet.objects.create(name = user.username)
-                slowdown_object = Slowdown.objects.create(name = user.username)
-                membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datet = datetime_object)
-                membership_object.save()
-                slowdown_object.save()
-                return render_to_response('usersites/student.html')
-
-            #check if the current user has pressed slow down and check if the user has pressed slow down in the last 10 seconds
-            if Membership.objects.filter(person = user, group = group).count() > 0:
-                #create new datetime object and find the last datetime object
-                slowdown_object = Slowdown.objects.create(name=user.username)
-                last_datetime_object = Datet.objects.filter(name=user.username).order_by('-id')[0]
-
-                #check if user has submitted a slow down in the last 10 seconds
-                #  -TODO: last datetime object on this particular group, assessed not necessary
-                if (last_datetime_object.datet) > timezone.now()-timedelta(seconds=10):
-                    variables = RequestContext(request, {'feedback': 'try again in a few seconds ... '})
-                    return render_to_response('usersites/student.html', variables)  # render the template with feedback
-
-                #if not in the last 10 seconds, save to database and give feedback
-                else:
-                    datetime_object = Datet.objects.create(name=user.username)
+                #if no student has pressed slow down button one can just make a new membership object
+                if Membership.objects.filter(group = group).count() == 0:
+                    #if the user is a student and the user is the first to join, safe to save to database
+                    datetime_object = Datet.objects.create(name = user.username)
+                    slowdown_object = Slowdown.objects.create(name = user.username)
                     membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datet = datetime_object)
                     membership_object.save()
                     slowdown_object.save()
 
-                    # send in slow button action to databse and render
-                    return render_to_response('usersites/student.html', RequestContext(request, {'feedback':'feedback delivered'}))
+                    questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+                    questions = list(reversed(questions))
+                    form = QuestionForm()
+                    return render_to_response('usersites/student.html', RequestContext(request, {
+                                                                                                 'form': form,
+                                                                                                 'questions': questions}))
 
-            else:   #user has not pressed button in this lecture before so we can simply save to database and continue
-                datetime_object = Datet.objects.create(name = user.username)
-                slowdown_object = Slowdown.objects.create(name=user.username)
-                membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datet = datetime_object)
-                membership_object.save()
-                return render_to_response('usersites/student.html', RequestContext(request, {'feedback': 'bop'}))
+                #check if the current user has pressed slow down and check if the user has pressed slow down in the last 10 seconds
+                if Membership.objects.filter(person = user, group = group).count() > 0:
+                    #create new datetime object and find the last datetime object
+                    slowdown_object = Slowdown.objects.create(name=user.username)
+                    last_datetime_object = Datet.objects.filter(name=user.username).order_by('-id')[0]
+
+                    #check if user has submitted a slow down in the last 10 seconds
+                    #  -TODO: last datetime object on this particular group, assessed not necessary
+                    if (last_datetime_object.datet) > timezone.now()-timedelta(seconds=10):
+                        questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+                        questions = list(reversed(questions))
+                        form = QuestionForm()
+                        return render_to_response('usersites/student.html', RequestContext(request, {'feedback': 'try again in a few seconds ... ',
+                                                                                                     'form': form,
+                                                                                                     'questions': questions}))
+                        # render the template with feedback
+
+                    #if not in the last 10 seconds, save to database and give feedback
+                    else:
+                        datetime_object = Datet.objects.create(name=user.username)
+                        membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datet = datetime_object)
+                        membership_object.save()
+                        slowdown_object.save()
+
+                        # send in slow button action to databse and render
+                        questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+                        questions = list(reversed(questions))
+                        form = QuestionForm()
+                        return render_to_response('usersites/student.html', RequestContext(request, {'feedback':'feedback delivered',
+                                                                                                     'form': form,
+                                                                                                     'questions': questions}))
+
+                else:   #user has not pressed button in this lecture before so we can simply save to database and continue
+                    datetime_object = Datet.objects.create(name = user.username)
+                    slowdown_object = Slowdown.objects.create(name=user.username)
+                    membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datet = datetime_object)
+                    membership_object.save()
+
+                form = QuestionForm()
+                questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+                questions = list(reversed(questions))
+                return render_to_response('usersites/student.html', RequestContext(request, {'form': form, 'questions': questions}))
+        elif request.POST['slowbtn'] == 'question' :
+            form = QuestionForm(request.POST)
+            if form.is_valid():
+                Question.objects.create(questionText=form.cleaned_data['question'], lecture=group_name)
+
+            questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+            questions = list(reversed(questions))
+            form = QuestionForm()
+
+            return render_to_response('usersites/student.html', RequestContext(request,
+                                                                               {'form': form,
+                                                                                'questions': questions}))
 
         else:   #group is not valid, redirect to /lecture page
             return HttpResponseRedirect('/lectures')
     else:   #load template
-        return render_to_response('usersites/student.html')
+        form = QuestionForm()
+        questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+        questions = list(reversed(questions))
+        variables = RequestContext(request, {'form': form, 'questions': questions})
+        return render_to_response('usersites/student.html', variables)
 
 #view for the homepage, what you see after you have logged in
 # -pass current username so that the user can feel welcome ~~
@@ -257,7 +294,7 @@ def teacher_view(request):
                 else:
                     minutelist[key] = 1
 
-            list = [['Time', 'Slowdown pressed']]
+            liste = [['Time', 'Slowdown pressed']]
 
             for i in range(0, 60, 2):
                 count = 0
@@ -265,9 +302,13 @@ def teacher_view(request):
                     count += minutelist[i]
                 elif i - 1 in minutelist.keys():
                     count += minutelist[i - 1]
-                list.append([i, count])
+                liste.append([i, count])
 
-            variables = RequestContext(request, {'count': count_last_minute, 'array':json.dumps(list), 'start_time':start_time}) #Make variables readable for html
+            questions = Question.objects.filter(lecture=group_name).values_list('questionText')
+            questions = list(reversed(questions))
+
+            variables = RequestContext(request, {'count': count_last_minute, 'array':json.dumps(liste), 'start_time':start_time, 'questions': questions}) #Make variables readable for html
+
             return render_to_response('usersites/teacher.html', variables)
         else:
             return render_to_response('usersites/wait.html') # load the waiting page, no input from users yet

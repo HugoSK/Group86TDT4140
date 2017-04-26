@@ -18,5 +18,14 @@
                 border-radius: 5px; vertical-align: middle">
     </form> <!--slow down knappen-->
     {{ feedback }}
+    <form action="" method="post">
+        {{ form }}
+        <input type="submit" name="slowbtn" value="question" />
+    </form>
+    {% for question in questions %}
+        {% for part in question%}
+            {{ part }} <br>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
 
