@@ -22,7 +22,7 @@
         <tr id="labels"><td style="padding-top: 20px;">{{ form.question }} <!-- det er den hvite boksen du skriver i-->
         <input type="submit" name="slowbtn" value="Send question" /> <!-- knappen for å sende inn spørsmål-->
     </form>
-    <div style="width: 700px; height: 500px; background-color: #fff; border: 1px solid #3B7FAC; padding: 10px; position: absolute; top: 45%; right: 31%; overflow: scroll;">
+    <div style="width: 700px; height: 500px; background-color: #fff; border: 1px solid #3B7FAC; padding: 10px; position: relative; display: inline-block; vertical-align: middle; top: 45%;  overflow: scroll;">
     {% for question in questions %}
         {% for part in question%}
             <div style="font-family: Ayuthaya; font-size: 20px; padding: 2px;" >{{ part }} <br>
