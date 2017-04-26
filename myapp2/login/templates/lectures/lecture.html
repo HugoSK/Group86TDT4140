@@ -1,0 +1,26 @@
+{% extends "homepage.html" %}
+{% block title %}Course{% endblock %}
+{% block head %}join/create lectures!{% endblock %}
+{% block content %}
+    <body>
+    <form id="classes" method="post" action="/lectures/">
+        <input type="text" name="lecture_name" value="" size="50" style="display: inline-block; width: 310px; height: 35px; font-size: 14px; border: none; padding: 5px; border-radius: 3px;"/>
+        <br />
+        <input type="submit" name="create" value="create lecture" />
+        <input type="submit" name="join" value="join lecture" />
+    </form>
+    {{ feedback }}
+    <p>current lectures as teacher: </p>
+    <ul>
+    {% for lecture in teacher_list %}
+        <li><a href="/usersites/teacher/?lecture_name={{ lecture }}">{{ lecture }}</a></li>
+    {% endfor %}
+    </ul>
+    <p>current lectures as student: </p>
+    <ul>
+    {% for lecture in student_list %}
+        <li><a href="/usersites/student/?lecture_name={{ lecture }}">{{ lecture }}</a></li>
+    {% endfor %}
+    </ul>
+    </body>
+{% endblock %}

@@ -24,13 +24,13 @@
 {% endblock %}
 {% block content %}
     <p>Start time = {{start_time}}</p>
-    <p>Antall studenter som synes du er for rask:</p>
+    <p>Slowdown requests last minute:</p>
     <div style="width: 500px; position: absolute; top:20%; right: 35%;">
         <h2 style="color: #33658C; font-size: 120px; text-shadow: 2px 2px #052944; text-align: center;">{{ count }}</h2>
     </div>
     <!-- telleren som forteller hvor mange som synes forelesningen går for raskt-->
     <div id="curve_chart" style="width: 500px; height: 350px; position:absolute;top:45%; right:35%;"></div>
-    <meta http-equiv="refresh" content="60" >
+    <meta http-equiv="refresh" content="10" >
 {% endblock %}
 
 
