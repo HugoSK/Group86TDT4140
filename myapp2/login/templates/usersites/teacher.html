@@ -23,13 +23,17 @@
     </script>
 {% endblock %}
 {% block content %}
-    <p>Start time = {{start_time}}</p>
-    <p>Slowdown requests last minute:</p>
-    <div style="width: 500px; position: absolute; top:20%; right: 35%;">
-        <h2 style="color: #33658C; font-size: 120px; text-shadow: 2px 2px #052944; text-align: center;">{{ count }}</h2>
+    <div style="width: 1210px; height: 500px; border: solid 1px #33658C; position: absolute; left: 17%;">
+        <div style="width: 600px; height: 500px; background-color: #fff; position: absolute; right: 0%;">
+            <p style="font-size: 40px;">Slowdown requests last minute:</p>
+            <h2 style="color: #33658C; font-size: 120px; text-shadow: 2px 2px #052944; text-align: center;">{{ count }}</h2>
+        </div>
+        <!-- telleren som forteller hvor mange som synes forelesningen går for raskt-->
+        <div style=" background-color: #fff; width: 610px; position:absolute;">
+            <p style="font-size: 20px; text-align: left; padding-left: 20px; padding-top: 8px;">Start time = {{start_time}}</p>
+        </div>
+        <div id="curve_chart" style="width: 610px; height: 450px; bottom: 0%; position:absolute;"></div>
     </div>
-    <!-- telleren som forteller hvor mange som synes forelesningen går for raskt-->
-    <div id="curve_chart" style="width: 500px; height: 350px; position:absolute;top:45%; right:35%;"></div>
     <meta http-equiv="refresh" content="10" >
 {% endblock %}
 

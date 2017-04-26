@@ -10,17 +10,23 @@
         <input type="submit" name="join" value="join lecture" />
     </form>
     {{ feedback }}
-    <p>current lectures as teacher: </p>
-    <ul>
-    {% for lecture in teacher_list %}
-        <li><a href="/usersites/teacher/?lecture_name={{ lecture }}">{{ lecture }}</a></li>
-    {% endfor %}
-    </ul>
-    <p>current lectures as student: </p>
-    <ul>
-    {% for lecture in student_list %}
-        <li><a href="/usersites/student/?lecture_name={{ lecture }}">{{ lecture }}</a></li>
-    {% endfor %}
-    </ul>
+    <div style="width: 1201px; height: 500px; background-color: #fff; position: absolute; right: 18%; top: 35%;border: 1px solid #21537A;">
+        <div style="width: 599px; height: 500px; background-color: #fff; position: absolute; border-right: solid 1px #21537A;">
+            <p style="font-size: 30px; text-align: left; color: #21537A; padding-left: 20px; border-bottom: solid 1px #21537A;">Current lectures as teacher: </p>
+            <ul>
+            {% for lecture in teacher_list %}
+                <a href="/usersites/teacher/?lecture_name={{ lecture }}" ><p style="font-family: Ayuthaya; font-size: 20px; text-align: left; color: #3B7FAC; padding-left: 5px;">{{ lecture }}</p></a><br>
+            {% endfor %}
+            </ul>
+        </div>
+        <div style="width: 600px; height: 500px; background-color: #fff; position: absolute; right: 0%;">
+            <p style="font-size: 30px; text-align: left; color: #21537A; padding-left: 20px; border-bottom: solid 1px #21537A;">Current lectures as student: </p>
+            <ul>
+            {% for lecture in student_list %}
+                <a href="/usersites/student/?lecture_name={{ lecture }}"><p style="font-family: Ayuthaya; font-size: 20px; text-align: left; color: #3B7FAC; padding-left: 5px;">{{ lecture }}</p></a><br>
+            {% endfor %}
+            </ul>
+        </div>
+        </div>
     </body>
 {% endblock %}
