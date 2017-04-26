@@ -30,11 +30,9 @@ def register_view(request):
             )
             return HttpResponseRedirect('/home')
         else:
-            variables = RequestContext(request, {'form': form, 'feedback':'Please fill out information correctly.'})
-            return render_to_response('register/register.html', variables)
+            return render_to_response('register/register.html', {'form': form, 'feedback':'Please fill out information correctly.'})
 
-    variables = RequestContext(request, {'form': form})
-    return render_to_response('register/register.html', variables)  #return statement, loads register.html template
+    return render_to_response('register/register.html', {'form': form})  #return statement, loads register.html template
 
 #view for first page
 # -loads the template, links to other parts of website
@@ -101,8 +99,6 @@ def lecture_view(request):
         else:
             student_groups.append(group.name)
 
-    #set the variables for the render function
-    variables = RequestContext(request, {'teacher_list':teacher_groups, 'student_list':student_groups})
 
     #check the user is trying to send information, validate
     if request.method == "POST":
@@ -126,9 +122,8 @@ def lecture_view(request):
                 #after the user have created the group/lecture, redirect to that lecture
                 return HttpResponseRedirect('/lectures/page/?lecture_name=%s' % (lecture_name))
             else:
-                variables = RequestContext(request, {'teacher_list': teacher_groups, 'student_list': student_groups,
-                                                     'feedback':'lecture name already in use! Please try another'})
-                return render_to_response('lectures/lecture.html', variables) #render the template with feedback
+                return render_to_response('lectures/lecture.html', {'teacher_list': teacher_groups, 'student_list': student_groups,
+                                                     'feedback':'lecture name already in use! Please try another'}) #render the template with feedback
 
         #user pressed join:
         else:
@@ -138,13 +133,12 @@ def lecture_view(request):
                 #redirect to the lecture page
                 return HttpResponseRedirect('/lectures/page/?lecture_name=%s' % (lecture_name))
             else:
-                variables = RequestContext(request, {'teacher_list': teacher_groups, 'student_list': student_groups,
-                                                     'feedback': 'Invalid lecture name! Please try another'})
-                return render_to_response('lectures/lecture.html', variables)  # render the template with feedback
+                return render_to_response('lectures/lecture.html', {'teacher_list': teacher_groups, 'student_list': student_groups,
+                                                     'feedback': 'Invalid lecture name! Please try another'})  # render the template with feedback
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render_to_response('lectures/lecture.html', variables)
+        return render_to_response('lectures/lecture.html', {'teacher_list':teacher_groups, 'student_list':student_groups})
 
 #view for user sign out
 @login_required(login_url='login')
@@ -189,9 +183,7 @@ def student_view(request):
                     questions = list(reversed(questions))
                     form = QuestionForm()
                     #empties form, question part is done for all scenarios
-                    return render_to_response('usersites/student.html', RequestContext(request, {
-                                                                                                 'form': form,
-                                                                                                 'questions': questions}))
+                    return render_to_response('usersites/student.html', {'form': form,'questions': questions})
 
                 #check if the current user has pressed slow down and check if the user has pressed slow down in the last 10 seconds
                 if Membership.objects.filter(person = user, group = group).count() > 0:
@@ -205,9 +197,7 @@ def student_view(request):
                         questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                         questions = list(reversed(questions))
                         form = QuestionForm()
-                        return render_to_response('usersites/student.html', RequestContext(request, {'feedback': 'try again in a few seconds ... ',
-                                                                                                     'form': form,
-                                                                                                     'questions': questions}))
+                        return render_to_response('usersites/student.html',{'feedback': 'try again in a few seconds ... ', 'form': form, 'questions': questions})
                         # render the template with feedback
 
                     #if not in the last 10 seconds, save to database and give feedback
@@ -221,9 +211,9 @@ def student_view(request):
                         questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                         questions = list(reversed(questions))
                         form = QuestionForm()
-                        return render_to_response('usersites/student.html', RequestContext(request, {'feedback':'feedback delivered',
+                        return render_to_response('usersites/student.html', request, {'feedback':'feedback delivered',
                                                                                                      'form': form,
-                                                                                                     'questions': questions}))
+                                                                                                     'questions': questions})
 
                 else:   #user has not pressed button in this lecture before so we can simply save to database and continue
                     datetime_object = Datet.objects.create(name = user.username)
@@ -234,7 +224,7 @@ def student_view(request):
                 form = QuestionForm()
                 questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                 questions = list(reversed(questions))
-                return render_to_response('usersites/student.html', RequestContext(request, {'form': form, 'questions': questions}))
+                return render_to_response('usersites/student.html', {'form': form, 'questions': questions})
         #Checks if its a question that have been sent
         elif request.POST['slowbtn'] == 'Send question' :
             #Uses the questionform under forms.py
@@ -247,9 +237,7 @@ def student_view(request):
             questions = list(reversed(questions))
             form = QuestionForm()
 
-            return render_to_response('usersites/student.html', RequestContext(request,
-                                                                               {'form': form,
-                                                                                'questions': questions}))
+            return render_to_response('usersites/student.html', {'form': form, 'questions': questions})
 
         else:   #group is not valid, redirect to /lecture page
             return HttpResponseRedirect('/lectures')
@@ -257,15 +245,13 @@ def student_view(request):
         form = QuestionForm()
         questions = Question.objects.filter(lecture=group_name).values_list('questionText')
         questions = list(reversed(questions))
-        variables = RequestContext(request, {'form': form, 'questions': questions})
-        return render_to_response('usersites/student.html', variables)
+        return render_to_response('usersites/student.html', {'form': form, 'questions': questions})
 
 #view for the homepage, what you see after you have logged in
 # -pass current username so that the user can feel welcome ~~
 @login_required(login_url='login')
 def homepage_view(request):
-    variables = RequestContext(request, {'username':request.user.username})
-    return render_to_response('homepage.html', variables)
+    return render_to_response('homepage.html', {'username':request.user.username})
 
 #view for the teacher inside a lecture
 @login_required(login_url='login')
@@ -313,9 +299,7 @@ def teacher_view(request):
             questions = Question.objects.filter(lecture=group_name).values_list('questionText')
             questions = list(reversed(questions))
 
-            variables = RequestContext(request, {'count': count_last_minute, 'array':json.dumps(liste), 'start_time':start_time, 'questions': questions}) #Make variables readable for html
-
-            return render_to_response('usersites/teacher.html', variables)
+            return render_to_response('usersites/teacher.html', {'count': count_last_minute, 'array':json.dumps(liste), 'start_time':start_time, 'questions': questions})
         else:
             return render_to_response('usersites/wait.html') # load the waiting page, no input from users yet
     else:

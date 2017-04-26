@@ -1,0 +1,16 @@
+Steps to run extrovert app:
+1. Have python and pip installed and valid as commands in command window
+
+Step 2 varies:
+If you are on windows, we have executables that can launch the program.
+
+If you have DJANGO installed, you can run Extrovert.bat under myapp2 folder and it should launch.
+
+If you do NOT have DJANGO installed, or you had an ERROR with the Extrovert.bat, please run ExtrovertExpanded.bat (only needed once, afterwards use other .bat file)
+
+If you are on any other operative system, write the following into your terminal:
+1. cd into your current folder.
+2. python manage.py runserver
+3. open the browser and paste http://127.0.0.1:8000/home
+
+Note that different versions of django might have different functionalities, this is assuming that you have newest version. 
