@@ -40,7 +40,7 @@ input[type=submit] {
     color: #052944;
     font-size: 18px;
 }
-#id_username, #id_email, #id_password1, #id_password2{
+#id_username, #id_email, #id_password1, #id_password2, #id_question1{
     display: inline-block;
     width: 300px;
     height: 35px;
