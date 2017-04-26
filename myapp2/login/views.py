@@ -303,7 +303,7 @@ def teacher_view(request):
         else:
             return render_to_response('usersites/wait.html') # load the waiting page, no input from users yet
     else:
-        return HttpResponseRedirect('/lectures')
+        return HttpResponseRedirect('/lectures', {'teacher_list':teacher_groups, 'student_list':student_groups})
 
 #view for the user view
 @login_required(login_url='login')
