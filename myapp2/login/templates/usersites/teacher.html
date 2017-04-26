@@ -20,25 +20,27 @@
     </script>
 {% endblock %}
 {% block content %}
-    <div style="width: 1210px; height: 500px; border: solid 1px #33658C; position: absolute; left: 17%;">
+    <!-- grafen og hvor mange som har trykket på slow down i minuttet er i en egen divboks-->
+    <div style="width: 1210px; height: 500px; border: solid 1px #33658C; position: absolute; left: 1%;">
         <div style="width: 600px; height: 500px; background-color: #fff; position: absolute; right: 0%;">
             <p style="font-size: 40px;">Slowdown requests last minute:</p>
             <h2 style="color: #33658C; font-size: 120px; text-shadow: 2px 2px #052944; text-align: center;">{{ count }}</h2>
+        </div><!-- telleren som forteller hvor mange som synes forelesningen går for raskt-->
+        <div style=" background-color: #fff; width: 610px; height: 500px;  position:absolute;">
+            <p style="font-size: 20px; text-align: left; padding-left: 20px; padding-top: 8px;">Start time = {{start_time}}</p><!-- når du startet timen-->
         </div>
-        <!-- telleren som forteller hvor mange som synes forelesningen går for raskt-->
-        <div style=" background-color: #fff; width: 610px; position:absolute;">
-            <p style="font-size: 20px; text-align: left; padding-left: 20px; padding-top: 8px;">Start time = {{start_time}}</p>
-        </div>
-        <div id="curve_chart" style="width: 610px; height: 450px; bottom: 0%; position:absolute;"></div>
+        <div id="curve_chart" style="width: 610px; height: 450px; bottom: 0%; position:absolute;"></div><!--grafen-->
     </div>
-    <meta http-equiv="refresh" content="10" >
-
+    <meta http-equiv="refresh" content="10" > <!--siden oppdateres hvert 10ende sekund-->
+    <div style="background-color: #fff; width: 600px; height: 500px; border: solid 1px #33658C; position: absolute; right: 1%; overflow: scroll;">
     {% for question in questions %}
         {% for part in question%}
-            {{ part }} <br>
+            <div style="font-family: Ayuthaya; font-size: 20px; padding: 2px;">{{ part }} <br>
+            </div>
         {% endfor %}
     {% endfor %}
-
+    </div> <!-- på samme måte som i 'student.html', så kommer spørsmålene som studentene har stilt opp i en egen div-boks
+     hos teacher. Stylen blir definert i starten av diven-->
 {% endblock %}
 
 

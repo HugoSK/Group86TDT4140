@@ -17,19 +17,21 @@
                 padding: 20px 32px;
                 border-radius: 5px; vertical-align: middle">
     </form> <!--slow down knappen-->
-    {{ feedback }}
+    {{ feedback }} <!-- hvis du har trykket på slow down knappen-->
     <form action="" method="post">
-        <tr id="labels"><td style="padding-top: 20px;">{{ form.question }}
-        <input type="submit" name="slowbtn" value="Send question" />
+        <tr id="labels"><td style="padding-top: 20px;">{{ form.question }} <!-- det er den hvite boksen du skriver i-->
+        <input type="submit" name="slowbtn" value="Send question" /> <!-- knappen for å sende inn spørsmål-->
     </form>
-    <div style="width: 600px; background-color: #fff; border: 1px solid #3B7FAC; padding: 10px; position: absolute; top: 60%; right: 33%;">
+    <div style="width: 700px; height: 500px; background-color: #fff; border: 1px solid #3B7FAC; padding: 10px; position: absolute; top: 45%; right: 31%; overflow: scroll;">
     {% for question in questions %}
         {% for part in question%}
-            <div style="font-family: Ayuthaya; font-size: 20px; padding: 2px;">{{ part }} <br>
+            <div style="font-family: Ayuthaya; font-size: 20px; padding: 2px;" >{{ part }} <br>
             </div>
+            <!--teksten ble skrevet i en div, for å gjøre det lettere å style den -part- er spørsmålet som har stilt-->
         {% endfor %}
     {% endfor %}
     </div>
+    <!-- her kommer spørsmålene studenten skriver opp i en boks, all style er definert i starten av diven-->
 {% endblock %}
 
 

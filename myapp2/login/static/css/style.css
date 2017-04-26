@@ -4,24 +4,9 @@ body {
      background-size:cover;
      background-color: #E2F8F9;
 }
-button:hover {
-    cursor: pointer;
-    background-color: #21537A;
-}
-.menu {
-    background-color: #33658C;
-    position: fixed;
-    top: 0;
-    right: 0;
-    border-color:#21537A;
-    border-right: 0;
-    border-top: 0;
-    border-bottom: 0;
-    display: inline-block;
-    height: 70px;
-    padding: 5px 5px;
-}
-input[type=submit] {
+
+/*------------------------------REGISTERFORM-------------------------------------------------*/
+input[type=submit] { /*style for register button in registerform*/
     width: 150px;
     height: 35px;
     font-size: 17px;
@@ -35,12 +20,12 @@ input[type=submit] {
     border-radius: 3px;
 }
 
-#labels{
+#labels{ /*style for all labels. ex: register-labels like username, email etc.*/
     font-family: Arial;
     color: #052944;
     font-size: 18px;
 }
-#id_username, #id_email, #id_password1, #id_password2, #id_question{
+#id_username, #id_email, #id_password1, #id_password2, #id_question{ /*to style registerform*/
     display: inline-block;
     width: 300px;
     height: 35px;
@@ -49,7 +34,7 @@ input[type=submit] {
     padding: 5px;
     border-radius: 3px;
 }
-#inputfield{
+#inputfield{ /*style for registerform*/
     display: inline-block;
     width: 300px;
     height: 35px;
@@ -59,7 +44,14 @@ input[type=submit] {
     border-radius: 3px;
 }
 
-.register {
+table{ /*to make forms work, ex: register*/
+    font-family: "Bodoni 72 Oldstyle";
+    color: #052944;
+    display: inline-block;
+    padding: 0px;
+}
+/*------------------------------------------HEADER-------------------------------------*/
+.register { /*register-button in header*/
     cursor: pointer;
     position: fixed;
     top: 0;
@@ -78,7 +70,7 @@ input[type=submit] {
     color: #fff;
     padding: 10px 20px;
 }
-.login {
+.login { /*login button in header*/
     cursor: pointer;
     position: fixed;
     top: 0;
@@ -98,40 +90,7 @@ input[type=submit] {
     padding: 10px 20px;
     border-right: 1px solid #21537A;
 }
-.dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100px;
-}
-.dropdown-menu{
-      display: none;
-      position: fixed;
-      right: 70px;
-      top: 70px;
-      background-color: #33658C;
-      min-width: 100px;
-      z-index: 1;
-      text-align: center;
-}
-.dropdown-menu a {
-       color: #fff;
-       text-decoration:none;
-       font-size: 18px;
-       font-family: "Arial";
-       font-weight:normal;
-       height: 50px;
-       padding-top: 10px;
-       display: block;
-}
-
-.dropdown-menu a:hover {
-    background-color: #21537A;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-#header {
+#header { /*the blue line at the top with title, login and register buttons*/
     position: fixed;
     min-width: auto;
     top: 0;
@@ -148,20 +107,20 @@ input[type=submit] {
     border-bottom: 1px solid #21537A;
     padding-left: 20px;
 }
-a {
+a { /*style on extrovert-logo in upper-left corner*/
     font-family: "Bodoni 72 Oldstyle";
     font-weight: bold;
     font-size: 50px;
     color: #052944;
     text-decoration: none;
 }
-
-#mainpic {
+/*--------------------------------------MAIN PAGE--------------------------------------*/
+#mainpic { /*main picture on index-page*/
     text-align: center;
     margin-top: 200px;
 }
 
-.button {
+.button { /*different buttons*/
     background-color: #33658C;
     font-family: "ITC Eras Light", Eras;
     text-align: center;
@@ -174,32 +133,7 @@ a {
     padding: 20px 32px;
     border-radius: 5px;
 }
-
-table{
-    font-family: "Bodoni 72 Oldstyle";
-    color: #052944;
-    display: inline-block;
-    padding: 0px;
-}
-#registerbtn{
-    text-align: center;
-    background-color: #33658C;
-    font-size: 40px;
-}
-
-#slowdownBtn {
-    background-color: #E2F8F9;
-}
-
-#counterÂ {
-    font-family: "Bodoni 72 Oldstyle";
-    font-weight: bold;
-    font-size: 70px;
-    color: #052944;
-    text-align: center;
-    margin-top: 40px;
-    margin-left: 40px;
-}
+/*---------------------------------DIFFERENT TEXT STYLES----------------------------*/
 p {
     font-family: "Bodoni 72 Oldstyle";
     font-size: 40px;
