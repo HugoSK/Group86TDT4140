@@ -28,5 +28,6 @@ class RegistrationForm(forms.Form):
                 raise forms.ValidationError(_("The two password fields did not match."))
         return self.cleaned_data
 
+#Short and sweet form that saves the text of the question. Question has maximum length of 200 characters.
 class QuestionForm(forms.Form):
     question = forms.CharField(label=_("Question"), max_length=200)

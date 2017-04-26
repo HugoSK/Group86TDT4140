@@ -20,6 +20,7 @@ class Membership(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
+#Saves questions to database, with text of the question and the lecture it belongs to. Likely best point from which continued expansion of the app would be possible.
 class Question(models.Model):
     questionText = models.CharField(max_length=256)
     lecture = models.CharField(max_length=128)

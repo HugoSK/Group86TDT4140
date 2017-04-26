@@ -168,8 +168,9 @@ def student_view(request):
 
     #if the request is a HTTP POST, try to pull out the relevant information.
     if request.method == "POST":
-        #check if the group is valid, as one can send in another page in the url
+        #Checks if the POST is from the slowdownbutton
         if request.POST['slowbtn'] == 'Slow down':
+            # check if the group is valid, as one can send in another page in the url
             if (Group.objects.filter(name=group_name)).count() > 0:
 
                 user = request.user
@@ -183,10 +184,11 @@ def student_view(request):
                     membership_object = Membership.objects.create(group = group, person = user, slowdown = slowdown_object, datet = datetime_object)
                     membership_object.save()
                     slowdown_object.save()
-
+                    #fetches questions and then sorts it so newest are first
                     questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                     questions = list(reversed(questions))
                     form = QuestionForm()
+                    #empties form, question part is done for all scenarios
                     return render_to_response('usersites/student.html', RequestContext(request, {
                                                                                                  'form': form,
                                                                                                  'questions': questions}))
@@ -215,7 +217,7 @@ def student_view(request):
                         membership_object.save()
                         slowdown_object.save()
 
-                        # send in slow button action to databse and render
+                        # send in slow button action to database and render
                         questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                         questions = list(reversed(questions))
                         form = QuestionForm()
@@ -233,8 +235,11 @@ def student_view(request):
                 questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                 questions = list(reversed(questions))
                 return render_to_response('usersites/student.html', RequestContext(request, {'form': form, 'questions': questions}))
+        #Checks if its a question that have been sent
         elif request.POST['slowbtn'] == 'Send question' :
+            #Uses the questionform under forms.py
             form = QuestionForm(request.POST)
+            #Checks if validity, if so adds it to database
             if form.is_valid():
                 Question.objects.create(questionText=form.cleaned_data['question'], lecture=group_name)
 
@@ -304,6 +309,7 @@ def teacher_view(request):
                     count += minutelist[i - 1]
                 liste.append([i, count])
 
+            #As in student is used to fetch questions
             questions = Question.objects.filter(lecture=group_name).values_list('questionText')
             questions = list(reversed(questions))
 
