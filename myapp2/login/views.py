@@ -233,7 +233,7 @@ def student_view(request):
                 questions = Question.objects.filter(lecture=group_name).values_list('questionText')
                 questions = list(reversed(questions))
                 return render_to_response('usersites/student.html', RequestContext(request, {'form': form, 'questions': questions}))
-        elif request.POST['slowbtn'] == 'question' :
+        elif request.POST['slowbtn'] == 'Send question' :
             form = QuestionForm(request.POST)
             if form.is_valid():
                 Question.objects.create(questionText=form.cleaned_data['question'], lecture=group_name)
