@@ -1,4 +1,3 @@
-# files.py
 import re
 from django import forms
 from django.contrib.auth.models import User
@@ -30,4 +29,4 @@ class RegistrationForm(forms.Form):
         return self.cleaned_data
 
 class QuestionForm(forms.Form):
-    question1 = forms.CharField(label='Question:', max_length=200)
+    question = forms.CharField(label='question', max_length=200)

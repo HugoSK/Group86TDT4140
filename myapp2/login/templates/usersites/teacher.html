@@ -8,16 +8,13 @@
     function drawChart() {
       var djangoData = {{ array|safe }};
       var data = google.visualization.arrayToDataTable(djangoData);
-
       var options = {
           title: 'Student feedback timeline',
           curveType: 'function',
           legend: { position: 'bottom' },
           vAxis: {viewWindowMode: "explicit", viewWindow:{ min: 0 }}
         };
-
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
         chart.draw(data, options);
     }
     </script>

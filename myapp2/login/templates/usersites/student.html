@@ -17,24 +17,19 @@
                 padding: 20px 32px;
                 border-radius: 5px; vertical-align: middle">
     </form> <!--slow down knappen-->
-        {{ feedback }}
-    <form method="post" action=".">
-        <table>
-            <tr id="labels"><td style="padding-top: 20px;">{{ form.question1.label }}</td></tr>
-            <tr id="inputfield"><td>{{ form.question1 }}</td></tr>
-        </table>
-        <br>
-        <input type="submit" value="Send question"  />
+    {{ feedback }}
+    <form action="" method="post">
+        {{ form }}
+        <input type="submit" name="slowbtn" value="question" />
     </form>
-
-
     <div style="width: 600px; background-color: #fff; border: 1px solid #3B7FAC; padding: 10px; position: absolute; top: 60%; right: 33%;">
     {% for question in questions %}
         {% for part in question%}
-                <div style="font-family: Ayuthaya; font-size: 20px; padding: 2px;">{{ part }} <br>
-                </div>
+            <div style="font-family: Ayuthaya; font-size: 20px; padding: 2px;">{{ part }} <br>
+            </div>
         {% endfor %}
     {% endfor %}
     </div>
 {% endblock %}
+
 
